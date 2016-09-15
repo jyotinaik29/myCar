@@ -1,0 +1,75 @@
+.verticalspace{
+ margin-top : 10px;
+}
+
+.full{
+   background: url('/images/background.jpeg') no-repeat center center fixed;
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   background-size: cover;
+   -o-background-size: cover;
+   height:100%;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #00000;
+  color : #ffffff;
+}
+
+.modal_theme{
+  background:#C3CCD5;
+}
+
+.thumb {
+    width: 24px;
+    height: 24px;
+    float: none;
+    position: relative;
+    top: 7px;
+}
+form .progress {
+    line-height: 15px;
+}
+
+}
+.progress {
+    display: inline-block;
+    width: 100px;
+    border: 3px groove #CCC;
+}
+.progress div {
+    font-size: smaller;
+    background: #1A6882;
+    width: 0;
+}
+
+.form-horizontal {
+    width:500px;
+}
+
+.datetime-picker-dropdown {
+
+}
+
+.datetime-picker-dropdown > li.date-picker-menu div > table .btn-default {
+    border: 0;
+}
+
+.datetime-picker-dropdown > li.time-picker-menu div > table {
+
+}
+
+.boxShadow{
+   box-shadow: 0 0 10px black;
+   margin-top : 10px;
+}
+
+.formBox{
+   border:solid 2px black;
+    padding: 5px;
+}

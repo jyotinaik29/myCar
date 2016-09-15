@@ -1,0 +1,21 @@
+<div class="modal-body modal_theme">
+<div class="container">
+	<div class="row" ng-show="showLoader">
+		<img src="images/loader/loader1.gif" class="img-responsive"/>
+		<p>
+			Please wait while we process your request
+		</p>
+	</div>
+	<div class="row">
+		  <div class="col-md-6">
+						{{errorMessageLabel}}
+			</div>
+	</div>
+
+	<div class="row verticalspace" ng-show="failure">
+		<div class="col-md-1">
+				<button type="submit" class="btn btn-primary btn-block" ng-click="ok()">Ok</button>
+		</div>
+	</div>
+</div>
+</div>

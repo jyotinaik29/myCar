@@ -1,0 +1,21 @@
+<div class="container" ng-controller="LoginController">
+  <div class="col-md-12">
+      <div class="alert">
+       <h2> {{lc_mainMessage}} </h2>
+      </div>
+  </div>
+  <div class="col-md-6">
+    <form name="login">
+      <div class="form-group">
+          <input type="email" name="email" class="form-control" ng-model="user.emailaddress" placeholder="Email Address" ng-click="clear('emailaddress')">        
+      </div>
+      <div class="form-group">
+          <input type="password" class="form-control" name="pwd" ng-model="user.password" placeholder="Password" ng-click="clear('password')">
+      </div>
+      <!--<button type="submit" class="btn btn-primary" ng-click="appLogin(user)">{{lc_submit}}</button>-->
+      <button type="submit" class="btn btn-primary" ng-click="appLogin(user)">{{lc_submit}}</button>
+      <button ui-sref="signup" class="btn btn-primary">{{lc_register}}</button>
+      <button ui-sref="forgotPassword" class="btn btn-primary">{{lc_forgotPassword}}</button>
+    </form>
+  </div>
+</div>

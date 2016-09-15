@@ -1,0 +1,44 @@
+<div class="container" ng-controller="VehicleStatusController">
+    <div class="alert">
+        <h2>Check status of your vehicle.</h2>        
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="email">Exact Vehcile Registration Number :</label>
+                <input type="text" id="registrationNumber" class="form-control" ng-model="registrationNumber">
+            </div>
+            <button type="submit" class="btn btn-primary" ng-click="getTheftStatusByVehicleRegNumber(registrationNumber)">Submit</button>
+            <div ng-show="theft_info != null">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img ng-src="{{theft_info.vehicle.attachments[0].publicUrl}}" class="img-thumbnail" alt="{{theft_info.vehicle.attachments[0].attachment_name}}" width="304" height="236">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-md-12">
+                                Theft Id: <span>{{theft_info.id}}</span>
+                            </div>
+                            <div class="col-md-12">
+                                Theft Status: <span>{{theft_info.status}}</span>
+                            </div>
+                            <div class="col-md-12">
+                                URL you can share with your friends
+                                <input type="text" readonly value="http://mylostcar.com/#/viewtheft?theftId={{theft_info.id}}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="theft_info == null">
+                Please enter registration number and search
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <div class="alert">
+
+            </div>
+        </div>
+    </div>
+</div>

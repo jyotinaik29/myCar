@@ -1,0 +1,67 @@
+<div class="container" ng-controller="SignUpController">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert">
+                <h2>Sign Up Form</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5">
+            <div class="form-group">
+                <input type="text" class="form-control" name="name" ng-model="user.name" placeholder="Name">
+            </div>
+            <div class="form-group">
+                <input type="email" name="email" class="form-control" ng-model="user.emailaddress" placeholder="Email Address">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="pwd" ng-model="user.password" placeholder="Password">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="repwd" placeholder="RetypePassword">
+            </div>
+            <div class="form-group">
+                <div class="row">
+                  <div class="col-md-4"><label>Gender</label></div>
+                  <div class="col-md-8">
+                        <select class="form-control" ng-model="user.gender">
+                            <option value="MALE">Male</option>
+                            <option value="FEMALE">Female</option>
+                            <option value="OTHER">Other</option>
+                        </select>
+                  </div>
+              </div>
+            </div>
+            <div class="form-group">
+               <input type="text" class="form-control" name="passport" ng-model="user.ic_passport" placeholder="IC/Passport">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="mobile" ng-model="user.contactNumber" placeholder="Contact Number">
+            </div>
+            <div class="form-group">
+                <div class="row">
+                  <div class="col-md-4"><label>Country :</label></div>
+                  <div class="col-md-8">
+                     <select class="form-control" ng-model="user.country_id">
+                        <option ng-repeat="country in countryList" value="{{country.country_code}}">{{country.country}}</option>
+                    </select>
+                  </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="city" ng-model="user.city" placeholder="City">
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" name="address" ng-model="user.address" placeholder="Address"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="addressCordinates">Address in map (If you want to provide us with) :</label>
+                <ng-map zoom="16" center="current-location" geo-fallback-center="4.672585, -74.059525" on-click="placeMarker()">
+                    <marker ng-repeat="pos in positions" position="{{pos.lat}}, {{pos.lng}}"></marker>
+                </ng-map>
+            </div>
+            <button type="submit" class="btn btn-primary" ng-click="signUp(user)">Register</button>
+        </div>
+    </div>
+
+</div>

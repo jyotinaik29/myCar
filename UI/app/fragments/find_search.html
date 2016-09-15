@@ -1,0 +1,45 @@
+<div class="row" ng-controller="FindController">
+  <div class="col-md-4">
+    <form>
+      <div class="form-group">
+          <label for="country">Country :</label>
+          <select class="form-control" ng-model="countryCode" ng-change="getVehicleTypes()">
+            <option ng-repeat="country in countryList" value="{{country.country_code}}" >{{country.country}}</option>
+          </select>
+      </div>
+      <div class="form-group">
+          <label for="type">Vehicle Type :</label>
+          <select name="vehicleType" class="form-control" ng-model="vehicleType" ng-change="getVehicleMakeList()">
+            <option ng-repeat="vehicleTypeElement in vehicleTypeList" value="{{vehicleTypeElement}}" >{{vehicleTypeElement}}</option>
+          </select>
+      </div>
+      <div class="form-group">
+          <label for="make">Make :</label>
+          <select name="vehicleMake" class="form-control" ng-model="vehicleMake" ng-change="getVehicleModelList()">
+              <option ng-repeat="vehicleMakeElement in vehicleMakeList" value="{{vehicleMakeElement}}" >{{vehicleMakeElement}}</option>
+          </select>
+      </div>
+      <div class="form-group">
+          <label for="make">Model :</label>
+          <select name="vehicleModel" class="form-control" ng-model="vehicleModel">
+              <option ng-repeat="vehicleModelElement in vehicleModelList" value="{{vehicleModelElement}}" >{{vehicleModelElement}}</option>
+          </select>
+      </div>
+      <button type="submit" class="btn btn-primary" ng-click="searchForStolenVehicles()">Search</button>
+    </form>
+  </div>
+  <div class="col-md-8">
+          <div class="row">
+            <div class="alert alert-info">
+                Do any of these vehicles look similar
+            </div>
+          </div>
+          <div class="row">
+          <div class="col-md-4" ng-repeat="theftInfo in theftInfoList">
+            <div>Stolen on {{theftInfo.theft_dateTime}}</div>
+            <img ng-src="{{theftInfo.vehicle.attachments[0].publicUrl}}" class="img-thumbnail" alt="{{theftInfo.vehicle.attachments[0].attachment_name}}" width="304" height="236">
+            <button ng-click="showTheftInfo(theftInfo)">Get Moore Info</button>
+          </div>
+          <div>
+  </div>
+</div>
