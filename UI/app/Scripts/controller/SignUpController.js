@@ -6,6 +6,7 @@ app.controller('SignUpController', function($scope, $http, $uibModal, $window,$l
     $scope.user.country_id = "IND";
     $scope.countryList = {};
     $scope.host = $location.host();
+    $scope.positions = [];
 
     $http.get('http://' + $scope.host +'/StolenVehicle/countries').then(function(response) {
         $scope.countryList = response.data;
@@ -54,14 +55,12 @@ app.controller('SignUpController', function($scope, $http, $uibModal, $window,$l
     };
 
     $scope.placeMarker = function(e) {
-        console.log(e.latLng.lat() + " " + e.latLng.lng());
         var ll = e.latLng;
-        $scope.positions = [];
         $scope.positions.push({
             lat: ll.lat(),
             lng: ll.lng()
         });
-        $scope.user.addressCordinates = "[" + e.latLng.lat() + "," + e.latLng.lng() + "]";
+        $scope.user.addressCordinates = '{"lat":'+ e.latLng.lat()+',"lng":'+e.latLng.lng()+"}";
     };
 
 });

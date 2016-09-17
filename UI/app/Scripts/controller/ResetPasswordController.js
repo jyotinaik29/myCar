@@ -1,26 +1,29 @@
-app.controller('ResetPasswordController', function($scope, $http, $uibModal) {
+app.controller('ResetPasswordController', function($scope, $http, $uibModal,$location) {
 
      $scope.resetPassword = {};
-     $scope.request={};
+     $scope.host = $location.host();
 
      $scope.resetPasswordForUser = function(user) {
 
-        $scope.request.method = 'post';
-        $scope.request.url = 'http://mylostcar.com/StolenVehicle/restPassword';
-        $scope.request.payLoad = $scope.resetPassword;
-        $scope.request.entityAttribute = 'resetPassword';
-        $scope.modalInstance = $uibModal.open({
+        var modalRequest = {};
+        modalRequest.method = 'post';
+        modalRequest.url = 'http://' + $scope.host +'/StolenVehicle/restPassword';
+        modalRequest.payLoad = $scope.resetPassword;
+        modalRequest.entityAttribute = 'resetPassword';
+        modalRequest.successMessage = 'Password reset link has been sent to you email address';
+        modalRequest.modalTime = 2000;
+        modalRequest.modalInstance = $uibModal.open({
             animation: true,
             templateUrl: 'dialog/loader.html',
             controller: 'ModalController',
             size: 'md',
             resolve: {
-                request: $scope.request
+                request: modalRequest
             }
 
         });
-        $scope.request.modalInstance = $scope.modalInstance;
-        $scope.modalInstance.result.then(function(result) {
+
+        modalRequest.modalInstance.result.then(function(result) {
 
         }, function() {
 
