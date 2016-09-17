@@ -1,8 +1,22 @@
-app.controller('AlertController', function($scope, $http, $uibModal,$location) {
+app.controller('AlertController', function($scope, $http, $uibModal,$location,LoginService) {
 
     $scope.findInfoList = null;
     $scope.request = {};
     $scope.host = $location.host();
+    $scope.hasAlerts = false;
+
+
+    $http.get('http://' + $scope.host + '/StolenVehicle/user').then(function(response) {
+          LoginService.setLoginStatus(true);
+          LoginService.setUser(response.data.user);
+          $scope.user  = response.data.user;
+        
+      }, function(data) {
+          LoginService.setLoginStatus(false);
+          LoginService.setUser(null);
+
+      });
+
     $scope.findInfoList = $http.get("http://"+ $scope.host +"/StolenVehicle/findInformationForUser").then(function(response) {
         $scope.findInfoList = response.data.find_info_list;
     }, function(data) {

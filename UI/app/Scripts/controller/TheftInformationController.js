@@ -7,6 +7,8 @@ app.controller('TheftInformationController', function($scope, $http, $uibModal,L
      $scope.registrationNumber = null;
      $scope.user = LoginService.getUser();
      $scope.theft_info_view = null;
+     $scope.host = $location.host();
+
 
      $scope.registerTheft = function(theft_info) {
 
@@ -19,7 +21,7 @@ app.controller('TheftInformationController', function($scope, $http, $uibModal,L
 
         var modalRequest = {};
         modalRequest.method = 'post';
-        modalRequest.url = 'http://mylostcar.com/StolenVehicle/registerTheft';
+        modalRequest.url = 'http://' + $scope.host + '/StolenVehicle/registerTheft';
         modalRequest.successMessage = 'Theft has been sucessfully registered. You will get an alert if some one finds it. Until then relax';
         modalRequest.modalTime = 3000;
         modalRequest.payLoad = $scope.theft_info;
@@ -56,7 +58,7 @@ app.controller('TheftInformationController', function($scope, $http, $uibModal,L
 $scope.getTheftInfoById = function() {
 
     var theft_info_id = $location.search().theftId;
-    $scope.theft_info_view = $http.get("http://mylostcar.com/StolenVehicle/getTheftInfo?theftId=" + theft_info_id).then(function(response) {
+    $scope.theft_info_view = $http.get("http://"+ $scope.host + "/StolenVehicle/getTheftInfo?theftId=" + theft_info_id).then(function(response) {
         $scope.theft_info_view = response.data.theft_info;
     }, function(data) {
         $scope.theft_info_view = null;
@@ -71,7 +73,7 @@ $scope.getTheftInfoById = function() {
     $scope.request.modalTime = 2000;
     $scope.request.payLoad = search;
     $scope.request.entityAttribute = 'search';
-    $scope.request.url = 'http://mylostcar.com/StolenVehicle/searchForTheft';
+    $scope.request.url = 'http://'+ $scope.host + '/StolenVehicle/searchForTheft';
     $scope.modalInstance = $uibModal.open({
            animation: true,
            templateUrl: 'dialog/loader.html',

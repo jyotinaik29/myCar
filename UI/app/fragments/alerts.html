@@ -1,28 +1,34 @@
 <div class="container" ng-controller="AlertController">
 
-  <p class="alert">
-      Good New!!
-      Looks like your vehicle has been found.
+  <div ng-if="hasAlerts">
+        <p class="alert">
+            Good New!!
+            Looks like your vehicle has been found.
 
-  </p>
-  <div ng-repeat="findInfo in findInfoList">
-      Found by  : {{findInfo.locators_name}}
-      Email address : {{findInfo.locators_email}}
-      Contact : {{findInfo.locators_contactNumber}}
-      Found at : {{findInfo.locators_contactNumber}}
+        </p>
+        <div ng-repeat="findInfo in findInfoList">
+            Found by  : {{findInfo.locators_name}}
+            Email address : {{findInfo.locators_email}}
+            Contact : {{findInfo.locators_contactNumber}}
+            Found at : {{findInfo.locators_contactNumber}}
 
-      <div class="container">
-        <div class="row">
-          <div ng-repeat = "attachment in findInfo.attachments" class="col-md-4">
-              <img ng-src="{{attachment.publicUrl}}" class="img-thumbnail" alt="Cinque Terre" width="304" height="236">
+            <div class="container">
+              <div class="row">
+                <div ng-repeat = "attachment in findInfo.attachments" class="col-md-4">
+                    <img ng-src="{{attachment.publicUrl}}" class="img-thumbnail" alt="Cinque Terre" width="304" height="236">
+                </div>
+              </div>
+             </div>
+             <p class="alert alert-info">
+               Is this your car
+                <button ng-click="claim(findInfo)">Claim</button>
+                <button ng-click="reject(findInfo)">Reject</button>
+             </p>
           </div>
-        </div>
-       </div>
-       <p class="alert alert-info">
-         Is this your car
-          <button ng-click="claim(findInfo)">Claim</button>
-          <button ng-click="reject(findInfo)">Reject</button>
-       </p>
-    </div>
   </div>
-</div>
+  <div ng-if="!hasAlerts">
+    <h2>
+      If some one finds your vehicle, you can get more information on this tab
+    </h2>
+  </div>
+  </div>

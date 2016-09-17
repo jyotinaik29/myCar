@@ -1,9 +1,21 @@
-app.controller('RewardsController',function($scope,$http,$uibModal,$location){
+app.controller('RewardsController',function($scope,$http,$uibModal,$location,LoginService){
 
     $scope.message = "Message";
     $scope.request = {};
     $scope.host = $location.host();
     $scope.findInfoListReadyForReward;
+
+    $http.get('http://' + $scope.host + '/StolenVehicle/user').then(function(response) {
+          LoginService.setLoginStatus(true);
+          LoginService.setUser(response.data.user);
+          $scope.user  = response.data.user;
+
+      }, function(data) {
+          LoginService.setLoginStatus(false);
+          LoginService.setUser(null);
+
+      });
+
 
     $http.get("http://"+ $scope.host +"/StolenVehicle/findInformationListReadyForReward").then(function(response) {
         $scope.findInfoListReadyForReward = response.data.find_info_list;

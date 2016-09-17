@@ -1,53 +1,72 @@
 <div class="container" ng-controller="TheftInformationController">
     <div class="col-md-12">
-        <div class="alert alert-info">
+        <div class="alert">
+          <h2>
             Register you lost vehicle here
+          </h2>
         </div>
     </div>
     <div class="col-md-6">
         <div ng-include="upload"></div>
-        <form class="formBox">
+        <form class="registerTheftForm" novalidate>
+          <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-4"><label>Vehicle Type :</label></div>
+                    <div class="col-md-8">
+                     <select name="type" class="form-control" ng-model="theft_info.vehicle.type">
+                    <option value="HATCHBACK">Hatchback</option>
+                    <option value="SEDAN">Sedan</option>
+                    <option value="MUV">MUV</option>
+                    <option value="SUV">suv</option>
+                    <option value="COUPE">Coupe</option>
+                    <option value="CONVERTIBLE">Convertible</option>
+                    <option value="WAGON">Wagon</option>
+                    <option value="VAN">Van</option>
+                    <option value="JEEP">Jeep</option>
+                    <option value="SUPER_CAR">Super Car</option>
+                    <option value="HYPER_CAR">Hyper Car</option>
+                  </select>
+                    </div>
+                </div>
+          </div>
             <div class="form-group">
-                <label for="type">Vehicle Type :</label>
-                <select name="type" class="form-control" ng-model="theft_info.vehicle.type">
-                    <option value="TWO_WHEELER">Two Wheeler</option>
-                    <option value="THREE_WHLEELER">Three Wheeler</option>
-                    <option value="QUAD">Quad</option>
-                    <option value="TRUCK">Truck</option>
-                    <option value="TANK">Tank</option>
-                    <option value="FOUR_WHEELER">Four Wheeler</option>
-                </select>
+                <input type="text" name="make" class="form-control" ng-model="theft_info.vehicle.make" required placeholder="Make">
+                <div ng-messages="registerTheftForm.make.$error" ng-show="registerTheftForm.$submitted" class="form-group has-error">
+                    <div ng-message="required">*Please enter make of the vehicle</div>
+                </div>
             </div>
             <div class="form-group">
-                <label for="make">Make :</label>
-                <input type="text" name="make" class="form-control" ng-model="theft_info.vehicle.make">
+                <input type="text" class="form-control" name="model" ng-model="theft_info.vehicle.model" placeholder="Model" required>
+                <div ng-messages="registerTheftForm.model.$error" ng-show="registerTheftForm.$submitted" class="form-group has-error">
+                    <div ng-message="required">*Please enter model of the vehicle</div>
+                </div>
             </div>
             <div class="form-group">
-                <label for="model">Model :</label>
-                <input type="text" class="form-control" name="model" ng-model="theft_info.vehicle.model">
+                <input type="text" class="form-control" name="yom" ng-model="theft_info.vehicle.year_of_make" placeholder="Year of Make" required>
+                <div ng-messages="registerTheftForm.yom.$error" ng-show="registerTheftForm.$submitted" class="form-group has-error">
+                    <div ng-message="required">*Please enter year of make for the vehicle</div>
+                </div>
             </div>
             <div class="form-group">
-                <label for="yom">Year Of Make :</label>
-                <input type="text" class="form-control" name="yom" ng-model="theft_info.vehicle.year_of_make">
+                <input type="text" class="form-control" name="color" ng-model="theft_info.vehicle.color" placeholder="Color">
+                <div ng-messages="registerTheftForm.color.$error" ng-show="registerTheftForm.$submitted" class="form-group has-error" required>
+                    <div ng-message="required">*Please enter color  of the vehicle</div>
+                </div>
             </div>
             <div class="form-group">
-                <label for="color">Color :</label>
-                <input type="text" class="form-control" name="color" ng-model="theft_info.vehicle.color">
+                <input type="text" class="form-control" name="registrationNumber" ng-model="theft_info.vehicle.registrationNo" required placeholder="Registration Number">
+                <div ng-messages="registerTheftForm.color.$error" ng-show="registerTheftForm.$submitted" class="form-group has-error" required>
+                    <div ng-message="required">*Please enter registration number of the vehicle</div>
+                </div>
             </div>
             <div class="form-group">
-                <label for="registrationNumber">Registration Number :</label>
-                <input type="text" class="form-control" name="registrationNumber" ng-model="theft_info.vehicle.registrationNo">
-            </div>
-            <div class="form-group">
-                <label for="extraInfo">Additional Message :</label>
-                <textarea class="form-control" name="extraInfo" ng-model="theft_info.vehicle.extra_info">
+                <textarea class="form-control" name="extraInfo" ng-model="theft_info.vehicle.extra_info" placeholder="Extra information">
                 </textarea>
             </div>
             <div class="form-group">
-                <label>Theft Date & Time</label>
                 <div class="row">
                     <div class="col-md-6">
-                        <input type="text" class="form-control" datetime-picker="MM/dd/yyyy HH:mm" ng-model="picker3.date" is-open="picker3.open" />
+                        <input type="text" class="form-control" datetime-picker="MM/dd/yyyy HH:mm" ng-model="picker3.date" is-open="picker3.open" placeholder="Date and Time"/>
                         <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'picker3')"><i class="fa fa-calendar"></i></button>
                     </div>
                 </div>
@@ -59,11 +78,10 @@
                 </ng-map>
             </div>
             <div class="form-group">
-                <label for="rewards">Rewards :</label>
-                <input type="text" class="form-control" name="rewards" ng-model="theft_info.rewards">
+                        <input type="text" class="form-control" name="rewards" ng-model="theft_info.rewards" placeholder="Reward money"/>
             </div>
 
-            <button type="submit" class="btn btn-primary" ng-click="registerTheft(theft_info)">Register</button>
+            <button type="submit" class="btn btn-primary" ng-click="registerTheftForm.$valid ? registerTheft(theft_info) : ''">Register</button>
         </form>
     </div>
 </div>

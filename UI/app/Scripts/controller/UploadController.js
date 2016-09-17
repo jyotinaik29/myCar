@@ -1,6 +1,7 @@
-app.controller('UploadController', ['$scope', 'Upload', '$timeout', function($scope, Upload, $timeout) {
+app.controller('UploadController', function($scope, Upload, $timeout,$location) {
 
-    $scope.operation = 'profile';
+    $scope.operation = 'theft';
+    $scope.host = $location.host();
 
     $scope.setOperation =  function(operation){
       $scope.operation = operation;
@@ -9,10 +10,10 @@ app.controller('UploadController', ['$scope', 'Upload', '$timeout', function($sc
     $scope.uploadFiles = function(file, errFiles) {
 
         var postUrl = null;
-        if($scope.operation  == "profile"){
-            postUrl = 'http://mylostcar.com/StolenVehicle/uploadAttachmentsForTheft';
+        if($scope.operation  == "theft"){
+            postUrl = 'http://' + $scope.host + '/StolenVehicle/uploadAttachmentsForTheft';
         }else if($scope.operation  == "find"){
-            postUrl = 'http://mylostcar.com/StolenVehicle/uploadAttachmentsForFind';
+            postUrl = 'http://' + $scope.host + '/StolenVehicle/uploadAttachmentsForFind';
         }
         $scope.f = file;
         $scope.errFile = errFiles && errFiles[0];
@@ -37,4 +38,4 @@ app.controller('UploadController', ['$scope', 'Upload', '$timeout', function($sc
             });
         }
     }
-}]);
+});

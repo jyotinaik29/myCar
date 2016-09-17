@@ -5,6 +5,17 @@ app.controller('VehicleController',function($scope,LoginService,$http,$location)
   $scope.hasVehilces = false;
   $scope.countryList = {};
   $scope.host = $location.host();
+
+  $http.get('http://' + $scope.host + '/StolenVehicle/user').then(function(response) {
+        LoginService.setLoginStatus(true);
+        LoginService.setUser(response.data.user);
+        $scope.user  = response.data.user;
+
+    }, function(data) {
+        LoginService.setLoginStatus(false);
+        LoginService.setUser(null);
+
+    });
   $scope.vehicles =   $http.get("http://" + $scope.host+ "/StolenVehicle/vehicles").then(function(data) {
           $scope.vehicles = data.data.vehicles;
           $scope.hasVehilces = true;
