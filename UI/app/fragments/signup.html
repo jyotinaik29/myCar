@@ -8,23 +8,36 @@
     </div>
     <div class="row">
         <div class="col-md-5">
+          <form name="signup" novalidate>
             <div class="form-group">
-                <input type="text" class="form-control" name="name" ng-model="user.name" placeholder="Name">
+                <input type="text" class="form-control" name="name" ng-model="user.name" placeholder="Name" required>
+                <div ng-messages="signup.name.$error" ng-show="signup.$submitted" class="form-group has-error">
+                    <div ng-message="required">*Please enter your name</div>
+                </div>
             </div>
             <div class="form-group">
-                <input type="email" name="email" class="form-control" ng-model="user.emailaddress" placeholder="Email Address">
+                <input type="email" name="email" class="form-control" ng-model="user.emailaddress" placeholder="Email Address" required>
+                <div ng-messages="signup.email.$error" ng-show="signup.$submitted" class="form-group has-error">
+                    <div ng-message="required">*Please enter your email address</div>
+                </div>
             </div>
             <div class="form-group">
-                <input type="password" class="form-control" name="pwd" ng-model="user.password" placeholder="Password">
+                <input type="password" class="form-control" name="pwd" ng-model="user.password" placeholder="Password" required>
+                <div ng-messages="signup.pwd.$error" ng-show="signup.$submitted" class="form-group has-error">
+                    <div ng-message="required">*Please enter your desired password</div>
+                </div>
             </div>
             <div class="form-group">
-                <input type="password" class="form-control" name="repwd" placeholder="RetypePassword">
+                <input type="password" class="form-control" name="repwd" placeholder="RetypePassword" ng-model="user.rePassword" required>
+                <div ng-messages="signup.repwd.$error" ng-show="signup.$submitted" class="form-group has-error">
+                    <div ng-message="required">*Please retype your desired password</div>
+                </div>
             </div>
             <div class="form-group">
                 <div class="row">
                   <div class="col-md-4"><label>Gender</label></div>
                   <div class="col-md-8">
-                        <select class="form-control" ng-model="user.gender">
+                        <select ng-model="user.gender" class="form-control">
                             <option value="MALE">Male</option>
                             <option value="FEMALE">Female</option>
                             <option value="OTHER">Other</option>
@@ -36,7 +49,10 @@
                <input type="text" class="form-control" name="passport" ng-model="user.ic_passport" placeholder="IC/Passport">
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" name="mobile" ng-model="user.contactNumber" placeholder="Contact Number">
+                <input type="text" class="form-control" name="contactNumber" ng-model="user.contactNumber" placeholder="Contact Number" required>
+                <div ng-messages="signup.contactNumber.$error" ng-show="signup.$submitted" class="form-group has-error">
+                    <div ng-message="required">*Please enter your contact number</div>
+                </div>
             </div>
             <div class="form-group">
                 <div class="row">
@@ -49,7 +65,10 @@
                 </div>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" name="city" ng-model="user.city" placeholder="City">
+                <input type="text" class="form-control" name="city" ng-model="user.city" placeholder="City" required>
+                <div ng-messages="signup.city.$error" ng-show="signup.$submitted" class="form-group has-error">
+                    <div ng-message="required">*Please enter your city</div>
+                </div>
             </div>
             <div class="form-group">
                 <textarea class="form-control" name="address" ng-model="user.address" placeholder="Address"></textarea>
@@ -59,8 +78,9 @@
                 <ng-map zoom="16" center="current-location" geo-fallback-center="4.672585, -74.059525" on-click="placeMarker()">
                     <marker ng-repeat="pos in positions" position="{{pos.lat}}, {{pos.lng}}"></marker>
                 </ng-map>
-            </div>
-            <button type="submit" class="btn btn-primary" ng-click="signUp(user)">Register</button>
+            </div>          
+            <button type="submit" class="btn btn-primary" ng-click="signup.$valid ? signUp(user) : ''">Register</button>
+          </form>
         </div>
     </div>
 

@@ -1,10 +1,13 @@
-app.controller('SignUpController', function($scope, $http, $uibModal, $window, LoginService) {
+app.controller('SignUpController', function($scope, $http, $uibModal, $window,$location, LoginService) {
 
 
     $scope.user = {};
+    $scope.user.gender = "MALE";
+    $scope.user.country_id = "IND";
     $scope.countryList = {};
+    $scope.host = $location.host();
 
-    $http.get("http://mylostcar.com/StolenVehicle/countries").then(function(response) {
+    $http.get('http://' + $scope.host +'/StolenVehicle/countries').then(function(response) {
         $scope.countryList = response.data;
     }, function(data) {
 
@@ -18,7 +21,7 @@ app.controller('SignUpController', function($scope, $http, $uibModal, $window, L
         $scope.user.termsAndCondition = true;
         var modalRequest = {};
         modalRequest.method = 'post';
-        modalRequest.url = 'http://mylostcar.com/StolenVehicle/register';
+        modalRequest.url = 'http://' + $scope.host + '/StolenVehicle/register';
         modalRequest.payLoad = $scope.user;
         modalRequest.entityAttribute = 'user';
         modalRequest.successMessage = 'User registration was successful. Kindly activate your account by clicking on the link in the email';

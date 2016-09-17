@@ -1,11 +1,9 @@
-app.controller('LandingPageController', function($scope,LoginService, $http,$window,$uibModal) {
+app.controller('LandingPageController', function($scope,LoginService, $http,$window,$uibModal,$location) {
 
     $scope.request = {};
 
-    //try to get the user details.
-    //After login we are redirecting the user to this page
-
-    $http.get("http://mylostcar.com/StolenVehicle/user").then(function(response) {
+    $scope.host = $location.host();
+    $http.get("http://" + $scope.host + "/StolenVehicle/user").then(function(response) {
             LoginService.setLoginStatus(true);
             LoginService.setUser(response.data.user);
         }, function(data) {

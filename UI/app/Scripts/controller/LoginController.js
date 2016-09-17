@@ -1,4 +1,4 @@
-app.controller('LoginController', function($scope, $http, $uibModal,LoginService,$window) {
+app.controller('LoginController', function($scope, $http, $uibModal,LoginService,$window,$location) {
 
     //all labels section go here
     $scope.lc_mainMessage = "Please login to report your lost vehicle";
@@ -17,7 +17,8 @@ app.controller('LoginController', function($scope, $http, $uibModal,LoginService
 
         var modalRequest = {};
         modalRequest.method = 'post';
-        modalRequest.url = 'http://mylostcar.com/StolenVehicle/login';
+        var host = $location.host();
+        modalRequest.url = 'http://' + host + '/StolenVehicle/login';
         modalRequest.entityAttribute = 'user';
         modalRequest.payLoad = $scope.user;
         modalRequest.successMessage = 'Welcome';
