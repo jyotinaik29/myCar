@@ -1,17 +1,19 @@
-app.controller('ProfileController', function($scope, LoginService, $http, $uibModal) {
+app.controller('ProfileController', function($scope, LoginService, $http, $uibModal,$location) {
 
-    $http.get("http://mylostcar.com/StolenVehicle/user").then(function(response) {
+   $scope.host = $location.host();
+
+    $http.get('http://' + $scope.host + '/StolenVehicle/user').then(function(response) {
         LoginService.setLoginStatus(true);
         LoginService.setUser(response.data.user);
+        $scope.user  = response.data.user;
     }, function(data) {
         LoginService.setLoginStatus(false);
         LoginService.setUser(null);
 
     });
-    $scope.user = LoginService.getUser();
-    $scope.countryList = {};
 
-    $http.get("http://mylostcar.com/StolenVehicle/countries").then(function(response) {
+    $scope.countryList = {};
+    $http.get('http://' + $scope.host + '/StolenVehicle/countries').then(function(response) {
         $scope.countryList = response.data;
     }, function(data) {
 
@@ -35,7 +37,7 @@ app.controller('ProfileController', function($scope, LoginService, $http, $uibMo
 
         var modalRequest = {};
         modalRequest.method = 'post';
-        modalRequest.url = 'http://mylostcar.com/StolenVehicle/user';
+        modalRequest.url = 'http://' + $scope.host+ '/StolenVehicle/user';
         modalRequest.entityAttribute = 'user';
         modalRequest.payLoad = $scope.user;
         modalRequest.successMessage = 'Profile details updated';
@@ -66,7 +68,7 @@ app.controller('ProfileController', function($scope, LoginService, $http, $uibMo
 
         var modalRequest = {};
         modalRequest.method = 'post';
-        modalRequest.url = 'http://mylostcar.com/StolenVehicle/password';
+        modalRequest.url = 'http://'+ $scope.host + '/StolenVehicle/password';
         modalRequest.entityAttribute = 'password';
         modalRequest.payLoad = {};
         modalRequest.payLoad.userId = $scope.user.id;
