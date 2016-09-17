@@ -1,12 +1,14 @@
 app.controller('ProfileController', function($scope, LoginService, $http, $uibModal,$location,$window) {
 
    $scope.host = $location.host();
+   $scope.positions = [];
 
     $http.get('http://' + $scope.host + '/StolenVehicle/user').then(function(response) {
         LoginService.setLoginStatus(true);
         LoginService.setUser(response.data.user);
         $scope.user  = response.data.user;
         $scope.user.password = "";
+        $scope.positions.push(JSON.parse($scope.user.addressCordinates));
     }, function(data) {
         LoginService.setLoginStatus(false);
         LoginService.setUser(null);
@@ -26,12 +28,12 @@ app.controller('ProfileController', function($scope, LoginService, $http, $uibMo
 
     $scope.placeMarker = function(e) {
         var ll = e.latLng;
-        $scope.positions = [];
+        $scope.positions.length = 0;
         $scope.positions.push({
             lat: ll.lat(),
             lng: ll.lng()
         });
-        $scope.user.addressCordinates = "[" + e.latLng.lat() + "," + e.latLng.lng() + "]";
+        $scope.user.addressCordinates = '{"lat":'+ e.latLng.lat()+',"lng":'+e.latLng.lng()+"}";
     };
 
     $scope.updateProfile = function(user) {
@@ -57,9 +59,9 @@ app.controller('ProfileController', function($scope, LoginService, $http, $uibMo
 
         //Check the response
         modalRequest.modalInstance.result.then(function(result) {
-            $window.location = '/#/landing';
+            $window.location = '/#/profile';
         }, function() {
-
+            $window.location = '/#/profile';
         });
 
 
@@ -92,7 +94,9 @@ app.controller('ProfileController', function($scope, LoginService, $http, $uibMo
 
         //Check the response
         modalRequest.modalInstance.result.then(function(result) {
-            $window.location = '/#/landing';
+            $window.location = '/#/login';
+            LoginService.setLoginStatus(false);
+            LoginService.setUser(null);
         }, function() {
               $window.location = '/#/profile';
         });
