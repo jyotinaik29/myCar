@@ -79,6 +79,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
             url: '/rewards',
             templateUrl: 'fragments/rewards.html'
         })
+        .state('setPassword', {
+            url: '/setPassword',
+            templateUrl: 'fragments/setPassword.html'
+        })
         .state('login',{
           url : '/login',
           templateUrl: 'fragments/login.html'
