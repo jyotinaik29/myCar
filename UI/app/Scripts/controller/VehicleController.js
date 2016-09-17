@@ -1,10 +1,11 @@
-app.controller('VehicleController',function($scope,LoginService,$http){
+app.controller('VehicleController',function($scope,LoginService,$http,$location){
 
   //get user object from service
   $scope.vehicles = {};
   $scope.hasVehilces = false;
   $scope.countryList = {};
-  $scope.vehicles =   $http.get("http://mylostcar.com/StolenVehicle/vehicles").then(function(data) {
+  $scope.host = $location.host();
+  $scope.vehicles =   $http.get("http://"+$scope.host+ "/StolenVehicle/vehicles").then(function(data) {
           $scope.vehicles = data.data.vehicles;
           $scope.hasVehilces = true;
       }, function(data) {

@@ -5,18 +5,32 @@
       <div class="form-group col-md-8">
                         <h3>Change YOur Password</h3>
                         <br />
-                        <label>Enter Old Password</label>
-                        <input type="password" class="form-control" ng-model="user.password">
-                        <label>Enter New Password</label>
-                        <input type="password" class="form-control" ng-model="user.newPassword">
-                        <label>Confirm New Password</label>
-                        <input type="password" class="form-control" ng-model="user.newPpassword">
-                        <br>
-                        <a href="#" class="btn btn-warning" ng-click="updatePassword(user)">Change Password</a>
+                        <form name="resetPassword" novalidate>
+                          <div class="form-group">
+                            <input type="password" name="oldPassword" class="form-control" ng-model="user.password" required placeholder="Old Password">
+                            <div ng-messages="resetPassword.oldPassword.$error" ng-show="resetPassword.$submitted" class="form-group has-error">
+                                <div ng-message="required">*Please enter your old password</div>
+                            </div>
+                          </div>
+                            <div class="form-group">
+                           <input type="password" name="newPassword" class="form-control" ng-model="user.newPassword" required placeholder="New Password">
+                            <div ng-messages="resetPassword.newPassword.$error" ng-show="resetPassword.$submitted" class="form-group has-error">
+                                <div ng-message="required">*Please enter your new password</div>
+                            </div>
+                          </div>
+                            <div class="form-group">
+                            <input type="password" name="cnfNewPassword" class="form-control" ng-model="user.newPpassword" required placeholder="Retype new password">
+                            <div ng-messages="resetPassword.cnfNewPassword.$error" ng-show="resetPassword.$submitted" class="form-group has-error">
+                                <div ng-message="required">*Please retype your new password</div>
+                            </div>
+                          </div>
+                            <br>
+                            <button type="submit" class="btn btn-primary" ng-click="resetPassword.$valid ? updatePassword(user) : ''">Change Password</button>
+                      </form>
         </div>
    </div>
    <div class="col-md-4">
-     <form>
+     <form name="profile" novalidate>
        <div class="form-group">
            <label for="name">Name :</label>
            <input type="text" class="form-control" name="name" ng-model="user.name">

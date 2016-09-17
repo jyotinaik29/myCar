@@ -1,4 +1,4 @@
-app.controller('ProfileController', function($scope, LoginService, $http, $uibModal,$location) {
+app.controller('ProfileController', function($scope, LoginService, $http, $uibModal,$location,$window) {
 
    $scope.host = $location.host();
 
@@ -6,6 +6,7 @@ app.controller('ProfileController', function($scope, LoginService, $http, $uibMo
         LoginService.setLoginStatus(true);
         LoginService.setUser(response.data.user);
         $scope.user  = response.data.user;
+        $scope.user.password = "";
     }, function(data) {
         LoginService.setLoginStatus(false);
         LoginService.setUser(null);
@@ -75,7 +76,7 @@ app.controller('ProfileController', function($scope, LoginService, $http, $uibMo
         modalRequest.payLoad.newPassword = $scope.user.newPpassword;
         modalRequest.payLoad.oldPassword = $scope.user.password;
 
-        modalRequest.successMessage = 'Password updated successfully';
+        modalRequest.successMessage = 'Password updated successfully. Kindly login again';
         modalRequest.modalTime = 2000;
 
         modalRequest.modalInstance = $uibModal.open({
@@ -93,7 +94,7 @@ app.controller('ProfileController', function($scope, LoginService, $http, $uibMo
         modalRequest.modalInstance.result.then(function(result) {
             $window.location = '/#/landing';
         }, function() {
-
+              $window.location = '/#/profile';
         });
     }
 

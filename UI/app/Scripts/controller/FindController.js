@@ -1,4 +1,4 @@
-app.controller('FindController',function($rootScope,$scope,$http,$uibModal){
+app.controller('FindController',function($rootScope,$scope,$http,$uibModal,$location){
 
   $scope.upload = "fragments/upload.html";
   $scope.countryList = {};
@@ -13,9 +13,10 @@ app.controller('FindController',function($rootScope,$scope,$http,$uibModal){
   $scope.search = {};
   $scope.theftInfoList = {};
   $scope.findInfo = {};
+  $scope.host = $location.host();
 
   $scope.countryCode = null;
-  $http.get("http://mylostcar.com/StolenVehicle/countries").then(function(response) {
+  $http.get("http://"  + $scope.host + "/StolenVehicle/countries").then(function(response) {
           $scope.countryList = response.data;
       }, function(data) {
 
@@ -23,7 +24,7 @@ app.controller('FindController',function($rootScope,$scope,$http,$uibModal){
 
     $scope.getVehicleTypes = function(){
 
-      var url = "http://mylostcar.com/StolenVehicle/vehiclesTypes?countryId=" + $scope.countryCode;
+      var url = "http://"+ $scope.host +"/StolenVehicle/vehiclesTypes?countryId=" + $scope.countryCode;
       $scope.search.country_id = $scope.countryCode;
       $http.get(url).then(function(response) {
               $scope.vehicleTypeList = response.data;
@@ -35,7 +36,7 @@ app.controller('FindController',function($rootScope,$scope,$http,$uibModal){
 
     $scope.getVehicleMakeList = function(){
 
-      var url = "http://mylostcar.com/StolenVehicle/vehicleMake?countryId=" + $scope.countryCode + "&vehicleType=" + $scope.vehicleType;
+      var url = "http://"+ $scope.host +"/StolenVehicle/vehicleMake?countryId=" + $scope.countryCode + "&vehicleType=" + $scope.vehicleType;
         $scope.search.type = $scope.vehicleType;
       $http.get(url).then(function(response) {
               $scope.vehicleMakeList = response.data;
@@ -47,7 +48,7 @@ app.controller('FindController',function($rootScope,$scope,$http,$uibModal){
 
     $scope.getVehicleModelList = function(){
 
-      var url = "http://mylostcar.com/StolenVehicle/vehicleModel?countryId=" + $scope.countryCode + "&vehicleType=" + $scope.vehicleType + "&vehicleMake=" + $scope.vehicleMake;
+      var url = "http://"+ $scope.host +"/StolenVehicle/vehicleModel?countryId=" + $scope.countryCode + "&vehicleType=" + $scope.vehicleType + "&vehicleMake=" + $scope.vehicleMake;
       $scope.search.make = $scope.vehicleMake;
       $http.get(url).then(function(response) {
               $scope.vehicleModelList = response.data;
@@ -59,7 +60,7 @@ app.controller('FindController',function($rootScope,$scope,$http,$uibModal){
 
     $scope.searchForStolenVehicles = function(){
 
-        $http.post("http://mylostcar.com/StolenVehicle/searchForStolenVehicles",{
+        $http.post("http://"+ $scope.host +"/StolenVehicle/searchForStolenVehicles",{
             "search" : $scope.search
 
         }).then(
@@ -119,7 +120,7 @@ app.controller('FindController',function($rootScope,$scope,$http,$uibModal){
       modalRequest.method = 'post';
       modalRequest.successMessage = 'Owner of this car will be notified about your find';
       modalRequest.modalTime = 2000;
-      modalRequest.url = 'http://mylostcar.com/StolenVehicle/reportFindForTheft';
+      modalRequest.url = 'http://"+ $scope.host +"/StolenVehicle/reportFindForTheft';
       modalRequest.payLoad = findInfo;
       modalRequest.entityAttribute = 'find_info';
       modalRequest.modalInstance = $uibModal.open({
