@@ -1,10 +1,17 @@
 <div class="modal-body modal_theme">
   <div class="container" ng-show="theft_info_view != null">
             <div class="row">
-                <div class="col-md-6 alert alert-info">
-                    <span>{{theft_info_view.user.name}}</span> has lost her/his vehicle with number
+                <div class="col-md-6">
+                    <div  class="well"
+                    <p>
+                    <span>{{theft_info_view.user.name}}</span> has lost her/his car with number
                     <span>{{theft_info_view.vehicle.registrationNo}}</span> on
                     <span>Date & Time</span> at {{theft_info_view.theft_dateTime}} He was a declared a reward of <strong>{{theft_info_view.rewards}}</strong>
+                  </p>
+                </div>
+                </div>
+                <div class="col-md-6">
+                  Rest of the information goes here
                 </div>
             </div>
             <div class="row">
