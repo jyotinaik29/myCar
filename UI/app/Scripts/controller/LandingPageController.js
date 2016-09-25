@@ -25,7 +25,7 @@ app.controller('LandingPageController', function($scope,LoginService, $http,$win
                 //show a dialog which states kindly login/register before registering a theft
               var modalRequest = {};
               modalRequest.method = 'show';
-              modalRequest.message = 'Kindly login/register with us before registering your theft';
+              modalRequest.message = 'Kindly login to register your theft';
               modalRequest.modalInstance = $uibModal.open({
                     animation: true,
                     templateUrl: 'dialog/loader.html',

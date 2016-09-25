@@ -1,7 +1,7 @@
 app.controller('LoginController', function($scope, $http, $uibModal,LoginService,$window,$location) {
 
     //all labels section go here
-    $scope.lc_mainMessage = "Please login to report your lost vehicle";
+    $scope.lc_mainMessage = "Login ";
     $scope.lc_emailAddressLabel = "Email Address";
     $scope.lc_passowrd = "Password";
     $scope.lc_submit = "Login";
@@ -42,6 +42,7 @@ app.controller('LoginController', function($scope, $http, $uibModal,LoginService
         }, function() {
           LoginService.setLoginStatus(false);
           LoginService.setUser(null);
+          $window.location='/#/login';
         });
     };
 

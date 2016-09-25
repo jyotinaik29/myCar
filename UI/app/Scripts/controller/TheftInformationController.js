@@ -38,7 +38,7 @@ app.controller('TheftInformationController', function($scope, $http, $uibModal,L
         });
         $scope.modalInstance.result.then(function(result) {
 
-
+              $window.location='/#/landing';
 
         }, function() {
 

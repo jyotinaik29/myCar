@@ -16,13 +16,13 @@ app.controller('VehicleController',function($scope,LoginService,$http,$location)
         LoginService.setUser(null);
 
     });
-  $scope.vehicles =   $http.get("http://" + $scope.host+ "/StolenVehicle/vehicles").then(function(data) {
+  $scope.vehicles =   $http.get("http://" + $scope.host + "/StolenVehicle/vehicles").then(function(data) {
           $scope.vehicles = data.data.vehicles;
-          $scope.hasVehilces = true;
+          $scope.hasVehilces = $scope.vehicles.length != 0 ? true : false;
       }, function(data) {
           $scope.hasVehilces = false;
   });
-  $http.get("http://mylostcar.com/StolenVehicle/countries").then(function(response) {
+  $http.get("http://" + $scope.host + "/StolenVehicle/countries").then(function(response) {
           $scope.countryList = response.data;
       }, function(data) {
 

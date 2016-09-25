@@ -2,46 +2,48 @@
     <div ng-if="hasVehilces">
         <div ng-repeat="vehicle in vehicles" class="boxShadow">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-3">
                     <img ng-src="{{vehicle.attachments[0].publicUrl}}" class="img-thumbnail" alt="{{vehicle.attachments[0].attachment_name}}" width="304" height="236">
                 </div>
                 <div class="col-md-8">
                     <div class="row">
-                        <div class="col-md-12">
-                            Id: <span>{{vehicle.id}}</span>
+                        <div class = "col-md-12">
+                          <label>Car details</label>
                         </div>
                         <div class="col-md-12">
-                            Type: <span>{{vehicle.type}}</span>
+                            <label>ID: </label> <span>{{vehicle.id}}</span>
                         </div>
                         <div class="col-md-12">
-                            Make: <span>{{vehicle.make}}</span>
+                            <label>Type: </label><span>{{vehicle.type}}</span>
                         </div>
                         <div class="col-md-12">
-                            Model: <span>{{vehicle.model}}</span>
+                            <label>Make: </label><span>{{vehicle.make}}</span>
                         </div>
                         <div class="col-md-12">
-                            Year Of Make: <span>{{vehicle.year_of_make}}</span>
+                            <label>Model: </label><span>{{vehicle.model}}</span>
                         </div>
                         <div class="col-md-12">
-                            Color: <span>{{vehicle.color}}</span>
+                            <label>Year Of Make: </label><span>{{vehicle.year_of_make}}</span>
                         </div>
                         <div class="col-md-12">
-                            Registration Number: <span>{{vehicle.registrationNo}}</span>
+                            <label>Color: </label><span>{{vehicle.color}}</span>
                         </div>
                         <div class="col-md-12">
-                            Extra Info: <span>{{vehicle.extra_info}}</span>
+                            <label>Registration Number: </label><span>{{vehicle.registrationNo}}</span>
                         </div>
                         <div class="col-md-12">
-                            Stolen: <span>{{vehicle.stolen}}</span>
+                            <label>Extra Info: </label><span>{{vehicle.extra_info}}</span>
+                        </div>
+                        <div class="col-md-12">
+                            <label>Stolen: </label><span>{{vehicle.stolen}}</span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="form-group">
-                &nbsp;
-              </div>
             <div class="row">
-                  <div class="col-md-1">
+                  <div class="col-md-12">
                     <p>
                       <strong>Images uploaded for theft :</strong>
                     </p>
@@ -53,6 +55,13 @@
                     </a>
                 </div>
             </div>
+        </div>
+    </div>
+    <div ng-if="!hasVehilces">
+        <div class="well">
+          <h2>
+          You have not registered any cars with us !!!
+        </h2>
         </div>
     </div>
 </div>

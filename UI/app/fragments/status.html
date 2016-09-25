@@ -1,14 +1,20 @@
 <div class="container" ng-controller="VehicleStatusController">
-    <div class="alert">
-        <h2>Check status of your vehicle.</h2>        
-    </div>
+    <div class="row">
+          <div class="col-md-6">
+              <div class="well">
+                <h2>Check status of your stolen vehicle</h2>
+                <h3>Buying a second hand car, it would be great to check if it was stolen in the past </h3>
+              </div>
+          </div>
+      </div>
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label for="email">Exact Vehcile Registration Number :</label>
-                <input type="text" id="registrationNumber" class="form-control" ng-model="registrationNumber">
+              <input type="text" id="registrationNumber" class="form-control" ng-model="registrationNumber" placeholder="Enter vehicle registration number">
             </div>
             <button type="submit" class="btn btn-primary" ng-click="getTheftStatusByVehicleRegNumber(registrationNumber)">Submit</button>
+            <div class="verticalspace">
+            </div>
             <div ng-show="theft_info != null">
                 <div class="row">
                     <div class="col-md-4">
@@ -17,28 +23,25 @@
                     <div class="col-md-8">
                         <div class="row">
                             <div class="col-md-12">
-                                Theft Id: <span>{{theft_info.id}}</span>
+                                <label>Theft Id:  </label><span>{{theft_info.id}}</span>
                             </div>
                             <div class="col-md-12">
-                                Theft Status: <span>{{theft_info.status}}</span>
+                                <label>Theft Status:  </label><span>{{theft_info.status}}</span>
                             </div>
                             <div class="col-md-12">
-                                URL you can share with your friends
-                                <input type="text" readonly value="http://mylostcar.com/#/viewtheft?theftId={{theft_info.id}}" />
+                                <strong>URL you can share with your friends</strong>
+                                <input type="text" readonly value="http://mylostcar.com/#/viewtheft?theftId={{theft_info.id}}" size="77"/>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div ng-show="theft_info == null">
-                Please enter registration number and search
+            <div ng-show="theft_info == null && searchClicked">
+              <div class="well">
+                Kindly check the registration number
+              </div>
             </div>
 
-        </div>
-        <div class="col-md-6">
-            <div class="alert">
-
-            </div>
         </div>
     </div>
 </div>

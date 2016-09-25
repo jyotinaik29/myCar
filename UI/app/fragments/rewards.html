@@ -1,7 +1,9 @@
 <div ng-controller="RewardsController">
 
-    <h2>List of find's which have been rewarded by you</h2>
-    
+    <div class = "well">
+    <h2>Rewards details</h2>
+  </div>
+
     <div ng-repeat="findInfo in findInfoListReadyForReward">
       Found by  : {{findInfo.locators_name}}
       Email address : {{findInfo.locators_email}}

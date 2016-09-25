@@ -1,8 +1,8 @@
 <div class="container" ng-controller="SignUpController">
     <div class="row">
-        <div class="col-md-12">
-            <div class="alert">
-                <h2>Sign Up Form</h2>
+        <div class="col-md-5">
+            <div class="well">
+                <h2>Register</h2>
             </div>
         </div>
     </div>
@@ -78,7 +78,7 @@
                 <ng-map zoom="16" center="current-location" geo-fallback-center="4.672585, -74.059525" on-click="placeMarker()">
                     <marker ng-repeat="pos in positions" position="{{pos.lat}}, {{pos.lng}}"></marker>
                 </ng-map>
-            </div>          
+            </div>
             <button type="submit" class="btn btn-primary" ng-click="signup.$valid ? signUp(user) : ''">Register</button>
           </form>
         </div>
