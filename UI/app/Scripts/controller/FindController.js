@@ -1,5 +1,6 @@
 app.controller('FindController',function($rootScope,$scope,$http,$uibModal,$location){
 
+  $scope.showMoreInfo = false;
   $scope.upload = "fragments/upload.html";
   $scope.countryList = {};
   $scope.vehicleTypeList = {};
@@ -14,6 +15,7 @@ app.controller('FindController',function($rootScope,$scope,$http,$uibModal,$loca
   $scope.theftInfoList = {};
   $scope.findInfo = {};
   $scope.host = $location.host();
+  $scope.theft_info_view = {};
 
   $scope.countryCode = null;
   $http.get("http://"  + $scope.host + "/StolenVehicle/countries").then(function(response) {
@@ -75,22 +77,8 @@ app.controller('FindController',function($rootScope,$scope,$http,$uibModal,$loca
 
     $scope.showTheftInfo = function(theftInfo){
 
-      $scope.request.method = 'show';
-      $scope.request.message = 'We will be showing you details here';
-      $scope.request.modalTime = -1;
-      $scope.request.theftInfo =  theftInfo;
-      $rootScope.theftInfo = theftInfo;
-      $scope.request.modalInstance = $uibModal.open({
-            animation: true,
-            templateUrl: 'dialog/viewtheft.html',
-            controller: 'VehicleViewController',
-            size: 'lg',
-            resolve: {
-                request: $scope.request
-            }
-
-        });
-
+      $scope.showMoreInfo = true;
+      $scope.theft_info_view = theftInfo;
     };
 
 

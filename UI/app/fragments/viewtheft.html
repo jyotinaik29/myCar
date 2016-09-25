@@ -20,7 +20,7 @@
                 <div class="col-md-4">
                     <img ng-src="{{theft_info_view.vehicle.attachments[0].publicUrl}}" class="img-thumbnail" alt="{{vehicle.attachments[0].attachment_name}}" width="304" height="236">
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-8 panel panel-default">
                     <div class="row">
                         <div class="col-md-12">
                             Id: <span>{{theft_info_view.vehicle.id}}</span>
@@ -68,7 +68,7 @@
         </div>
         <div class="container" ng-show="theft_info_view == null">
             <div class="alert">
-                Sorry looks to be wrong theft id. Kindly check with your friend again for the url or contact customer service
+                Sorry, looks to be a wrong theft id. Kindly check with your friend again for the url or contact customer service
             </div>
         </div>
     </div>
