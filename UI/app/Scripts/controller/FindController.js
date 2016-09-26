@@ -1,4 +1,4 @@
-app.controller('FindController',function($rootScope,$scope,$http,$uibModal,$location){
+app.controller('FindController',function($rootScope,$scope,$http,$uibModal,$location,$window){
 
   $scope.showMoreInfo = false;
   $scope.upload = "fragments/upload.html";
@@ -91,14 +91,23 @@ app.controller('FindController',function($rootScope,$scope,$http,$uibModal,$loca
     };
 
 
+    $scope.confirm = function(theft_info_view){
+        alert('Kindly upload find information');
+        $window.location='/#/found/upload';
+        $rootScope.theft_info_view = theft_info_view;
 
+    }
+
+    $scope.cancel = function(){
+      alert("you just clicked on cancel");
+    }
 
     $scope.reportFindForTheft = function(findInfo){
 
 
       var date = new Date();
       findInfo.find_dateTime = date.toISOString();
-      var theftInfoVal = $rootScope.theftInfo;
+      var theftInfoVal =  $rootScope.theft_info_view;
       findInfo.theft_information_id = theftInfoVal.id;
       findInfo.vehicle_id = theftInfoVal.vehicle.id;
       findInfo.user_id = theftInfoVal.user.id;
@@ -107,8 +116,8 @@ app.controller('FindController',function($rootScope,$scope,$http,$uibModal,$loca
       var modalRequest = {};
       modalRequest.method = 'post';
       modalRequest.successMessage = 'Owner of this car will be notified about your find';
-      modalRequest.modalTime = 2000;
-      modalRequest.url = 'http://"+ $scope.host +"/StolenVehicle/reportFindForTheft';
+      modalRequest.modalTime = 5000;
+      modalRequest.url = 'http://'+ $scope.host + '/StolenVehicle/reportFindForTheft';
       modalRequest.payLoad = findInfo;
       modalRequest.entityAttribute = 'find_info';
       modalRequest.modalInstance = $uibModal.open({
@@ -123,9 +132,11 @@ app.controller('FindController',function($rootScope,$scope,$http,$uibModal,$loca
       });
       modalRequest.modalInstance.result.then(function(result) {
 
+              $window.location='/#/landing';
 
       }, function() {
 
+              $window.location='/#/landing';
       });
 
     }

@@ -1,26 +1,52 @@
 <div ng-controller="RewardsController">
-
     <div class = "well">
-    <h2>Rewards details</h2>
-  </div>
-
-    <div ng-repeat="findInfo in findInfoListReadyForReward">
-      Found by  : {{findInfo.locators_name}}
-      Email address : {{findInfo.locators_email}}
-      Contact : {{findInfo.locators_contactNumber}}
-      Found at : {{findInfo.locators_contactNumber}}
-
-      <div class="container">
-        <div class="row">
-          <div ng-repeat = "attachment in findInfo.attachments" class="col-md-4">
-              <img ng-src="{{attachment.publicUrl}}" class="img-thumbnail" alt="Cinque Terre" width="304" height="236">
+      <h2>Rewards details</h2>
+    </div>
+    <div ng-repeat="findInfo in findInfoListReadyForReward" class="boxShadow">
+      <div class="row">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-3">
+            <img ng-src="{{findInfo.attachments[0].publicUrl}}" class="img-thumbnail" alt="{{findInfo.attachments[0].attachment_name}}" width="304" height="236">
+        </div>
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-md-12">
+                <label>Found by  : </label><span>{{findInfo.locators_name}}</span>
+            </div>
+            <div class="col-md-12">
+                <label>Email address :  </label><span>{{findInfo.locators_email}}</span>
+            </div>
+            <div class="col-md-12">
+                <label>Contact :  </label><span>{{findInfo.locators_contactNumber}}</span>
+            </div>
+            <div class="col-md-12">
+                <label>Found at :  </label><span> {{findInfo.locators_contactNumber}}</span>
+            </div>
           </div>
         </div>
-       </div>
-       <p class="alert alert-info">
-         Is this your car
-          <button ng-click="giveReward(findInfo)">Yes</button>
-          <button ng-click="rejectReward(findInfo)">No</button>
-       </p>
-    </div>
+      </div>
+      <div class="row">
+            <div class="col-md-12">
+              <p>
+                <strong>Images uploaded for find :</strong>
+              </p>
+            </div>
+            <div class="col-md-3" ng-repeat="attachment in findInfo.attachments">
+
+              <a href="{{attachment.publicUrl}}" class="thumbnail">
+                  <img ng-src="{{attachment.publicUrl}}" alt="Pulpit Rock" style="width:100px;height:100px">
+              </a>
+          </div>
+      </div>
+      <div class="row">
+           <div class="col-md-6">
+             <div class="well">
+             Is this your car
+              <button class="btn btn-primary" ng-click="claim(findInfo)">Claim</button>
+              <button class="btn btn-primary" ng-click="reject(findInfo)">Reject</button>
+            </div>
+           </div>
+      </div>
+    </div>  
 </div>

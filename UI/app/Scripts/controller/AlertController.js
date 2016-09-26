@@ -10,7 +10,7 @@ app.controller('AlertController', function($scope, $http, $uibModal,$location,Lo
           LoginService.setLoginStatus(true);
           LoginService.setUser(response.data.user);
           $scope.user  = response.data.user;
-        
+
       }, function(data) {
           LoginService.setLoginStatus(false);
           LoginService.setUser(null);
@@ -19,71 +19,81 @@ app.controller('AlertController', function($scope, $http, $uibModal,$location,Lo
 
     $scope.findInfoList = $http.get("http://"+ $scope.host +"/StolenVehicle/findInformationForUser").then(function(response) {
         $scope.findInfoList = response.data.find_info_list;
+          $scope.hasAlerts = true;
     }, function(data) {
 
     });
 
     $scope.claim = function(findInfo) {
-      $scope.find_info = {
+
+      var modalRequest = {};
+      var find_info = {
           "id" : findInfo.id,
            "findStatus" : "ACCEPTED"
 
       };
-      $scope.request.method = 'post';
-      $scope.request.url = 'http://'+ $scope.host + '/StolenVehicle/updateFindInformationStatus';
-      $scope.request.payLoad = $scope.find_info;
-      $scope.request.entityAttribute = 'find_info';
-      $scope.request.message = 'You have accpeted the find and finder has been notified for the same';
-      $scope.modalInstance = $uibModal.open({
+
+      modalRequest.method = 'post';
+      modalRequest.url = 'http://' + $scope.host+ '/StolenVehicle/updateFindInformationStatus';
+      modalRequest.entityAttribute = 'find_info';
+      modalRequest.payLoad = find_info;
+      modalRequest.successMessage = 'You have accpeted the find and finder has been notified for the same';
+      modalRequest.modalTime = 3000;
+
+      modalRequest.modalInstance = $uibModal.open({
           animation: true,
           templateUrl: 'dialog/loader.html',
           controller: 'ModalController',
           size: 'md',
           resolve: {
-              request: $scope.request
+              request: modalRequest
           }
 
       });
-      $scope.request.modalInstance = $scope.modalInstance;
-      $scope.modalInstance.result.then(function(result) {
-
+      //Check the response
+      modalRequest.modalInstance.result.then(function(result) {
+          $window.location = '/#/landing';
       }, function() {
-
-
+          $window.location = '/#/landing';
       });
 
     };
 
     $scope.reject = function(findInfo) {
 
-        $scope.find_info = {
-            "id" : findInfo.id,
-             "findStatus" : "REJECTED"
 
-        };
-        $scope.request.method = 'post';
-        $scope.request.url = 'http://'+ $scope.host + '/StolenVehicle/updateFindInformationStatus';
-        $scope.request.payLoad = $scope.find_info;
-        $scope.request.entityAttribute = 'find_info';
-        $scope.request.message = 'You have rejected the find and finder has been notified for the same';
-        $scope.modalInstance = $uibModal.open({
-            animation: true,
-            templateUrl: 'dialog/loader.html',
-            controller: 'ModalController',
-            size: 'md',
-            resolve: {
-                request: $scope.request
-            }
+      var modalRequest = {};
+      var find_info = {
+          "id" : findInfo.id,
+           "findStatus" : "REJECTED"
 
-        });
-        $scope.request.modalInstance = $scope.modalInstance;
-        $scope.modalInstance.result.then(function(result) {
+      };
 
-        }, function() {
+      modalRequest.method = 'post';
+      modalRequest.url = 'http://' + $scope.host+ '/StolenVehicle/updateFindInformationStatus';
+      modalRequest.entityAttribute = 'find_info';
+      modalRequest.payLoad = find_info;
+      modalRequest.successMessage = 'You have rejected the find and finder has been notified for the same';
+      modalRequest.modalTime = 3000;
 
+      modalRequest.modalInstance = $uibModal.open({
+          animation: true,
+          templateUrl: 'dialog/loader.html',
+          controller: 'ModalController',
+          size: 'md',
+          resolve: {
+              request: modalRequest
+          }
 
-        });
-    }
+      });
+      //Check the response
+      modalRequest.modalInstance.result.then(function(result) {
+          $window.location = '/#/landing';
+      }, function() {
+          $window.location = '/#/landing';
+      });
+
+    };
 
 
 });
