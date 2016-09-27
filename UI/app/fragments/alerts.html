@@ -7,6 +7,8 @@
         </h2>
       </div>
         <div ng-repeat="findInfo in findInfoList" class="boxShadow">
+         <!--  <div ng-if="findInfo.findStatus == 'REPORTED'">-->
+         <div ng-if="true">
           <div class="row">
             <div class="col-md-1">
             </div>
@@ -25,7 +27,14 @@
                     <label>Contact :  </label><span>{{findInfo.locators_contactNumber}}</span>
                 </div>
                 <div class="col-md-12">
-                    <label>Found at :  </label><span> {{findInfo.locators_contactNumber}}</span>
+                    <label>Found at :  </label>
+                    <div class = "row">
+                      <div class="col-md-6">
+                        <ng-map center="{{findInfo.find_location_cordinates}}" zoom="12">
+                           <marker position="{{findInfo.find_location_cordinates}}"></marker>
+                        </ng-map>
+                      </div>
+                    </div>
                 </div>
               </div>
             </div>
@@ -53,7 +62,7 @@
                </div>
           </div>
         </div>
-
+      </div>
   </div>
   <div ng-if="!hasAlerts" class = "well">
     <h2>

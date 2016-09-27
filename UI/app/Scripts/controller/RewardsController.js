@@ -23,37 +23,40 @@ app.controller('RewardsController',function($scope,$http,$uibModal,$location,Log
 
     });
 
-    $scope.giveReward  = function(findInfo){
 
+    $scope.reward  = function(findInfo){
+
+      var modalRequest = {};
       var reward = {};
       reward.theftId = findInfo.theft_information_id;
-      reward.findInformationId = findInfo.id;
-      $scope.request.method = 'post';
-      $scope.request.url = 'http://'+ $scope.host + '/StolenVehicle/reward';
-      $scope.request.payLoad = reward;
-      $scope.request.entityAttribute = 'reward';
-      $scope.modalInstance = $uibModal.open({
+      modalRequest.method = 'post';
+      modalRequest.url = 'http://'+ $scope.host + '/StolenVehicle/reward';
+      modalRequest.entityAttribute = 'reward';
+      modalRequest.payLoad = reward;
+      modalRequest.successMessage = 'You have succesfully updated findinformation.';
+      modalRequest.modalTime = 2000;
+      modalRequest.modalInstance = $uibModal.open({
           animation: true,
           templateUrl: 'dialog/loader.html',
           controller: 'ModalController',
           size: 'md',
           resolve: {
-              request: $scope.request
+              request: modalRequest
           }
 
       });
-      $scope.request.modalInstance = $scope.modalInstance;
-      $scope.modalInstance.result.then(function(result) {
-
+      //Check the response
+      modalRequest.modalInstance.result.then(function(result) {
+          $window.location = '/#/profile';
       }, function() {
-
-
+          $window.location = '/#/profile';
       });
+
 
     }
 
-    $scope.rejectReward  = function(findInfo){
+    $scope.reject  = function(findInfo){
 
-
+        alert('you are bad');
     }
 });

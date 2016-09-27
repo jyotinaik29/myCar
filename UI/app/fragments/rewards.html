@@ -1,6 +1,8 @@
 <div ng-controller="RewardsController">
     <div class = "well">
       <h2>Rewards details</h2>
+      <h3>Please honour the reward if you have declared one
+      and update the status of the find</h3>
     </div>
     <div ng-repeat="findInfo in findInfoListReadyForReward" class="boxShadow">
       <div class="row">
@@ -21,8 +23,15 @@
                 <label>Contact :  </label><span>{{findInfo.locators_contactNumber}}</span>
             </div>
             <div class="col-md-12">
-                <label>Found at :  </label><span> {{findInfo.locators_contactNumber}}</span>
-            </div>
+                    <label>Found at :  </label>
+                    <div class = "row">
+                      <div class="col-md-6">
+                        <ng-map center="{{findInfo.find_location_cordinates}}" zoom="12">
+                           <marker position="{{findInfo.find_location_cordinates}}"></marker>
+                        </ng-map>
+                      </div>
+                    </div>
+                </div>
           </div>
         </div>
       </div>
@@ -40,13 +49,13 @@
           </div>
       </div>
       <div class="row">
-           <div class="col-md-6">
+           <div class="col-md-12">
              <div class="well">
-             Is this your car
-              <button class="btn btn-primary" ng-click="claim(findInfo)">Claim</button>
-              <button class="btn btn-primary" ng-click="reject(findInfo)">Reject</button>
+              Reward the person who has found your car
+              <button class="btn btn-primary" ng-click="reward(findInfo)">Reward has been given</button>
+              <button class="btn btn-primary" ng-click="reject(findInfo)">No I did not declare one</button>
             </div>
            </div>
       </div>
-    </div>  
+    </div>
 </div>

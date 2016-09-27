@@ -5,7 +5,6 @@ app.controller('AlertController', function($scope, $http, $uibModal,$location,Lo
     $scope.host = $location.host();
     $scope.hasAlerts = false;
 
-
     $http.get('http://' + $scope.host + '/StolenVehicle/user').then(function(response) {
           LoginService.setLoginStatus(true);
           LoginService.setUser(response.data.user);
@@ -19,7 +18,10 @@ app.controller('AlertController', function($scope, $http, $uibModal,$location,Lo
 
     $scope.findInfoList = $http.get("http://"+ $scope.host +"/StolenVehicle/findInformationForUser").then(function(response) {
         $scope.findInfoList = response.data.find_info_list;
-          $scope.hasAlerts = true;
+        if($scope.findInfoList != null && $scope.findInfoList.length > 0){
+            $scope.hasAlerts = true;
+        }
+
     }, function(data) {
 
     });
