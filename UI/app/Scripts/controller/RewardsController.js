@@ -29,6 +29,7 @@ app.controller('RewardsController',function($scope,$http,$uibModal,$location,Log
       var modalRequest = {};
       var reward = {};
       reward.theftId = findInfo.theft_information_id;
+      reward.findInformationId = findInfo.id;
       modalRequest.method = 'post';
       modalRequest.url = 'http://'+ $scope.host + '/StolenVehicle/reward';
       modalRequest.entityAttribute = 'reward';
@@ -57,6 +58,6 @@ app.controller('RewardsController',function($scope,$http,$uibModal,$location,Log
 
     $scope.reject  = function(findInfo){
 
-        alert('you are bad');
+      
     }
 });
